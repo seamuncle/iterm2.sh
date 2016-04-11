@@ -14,6 +14,18 @@ if [ -n $ITERM_SESSION_ID ]; then
     }
     # public
     export -f tab-color
+    
+    v-colour() {
+        # divide colours by 4 to darken; and translate to hex
+        R=$( printf "%02x" `expr $1 / 4` )
+        G=$( printf "%02x" `expr $2 / 4` )
+        B=$( printf "%02x" `expr $3 / 4` )
+
+        # term BG
+        echo -ne "\033]Ph$R$G$B\033\\"
+    }
+    # public
+    export -f bg-color
 
     tab-red() { tab-color 255 0 0; }
 
@@ -34,11 +46,14 @@ if [ -n $ITERM_SESSION_ID ]; then
     	    prod_pattern='prod'
             if [[ $1 =~ $prod_pattern ]]; then
                tab-color 255 160 160
+               bg-color 255 160 160
             else
                tab-color 160 255 160
+               bg-color 160 255 160
             fi
         else
   	    tab-color 160 160 255
+            bg-color 160 160 255
         fi
     }
 

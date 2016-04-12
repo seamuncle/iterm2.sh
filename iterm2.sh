@@ -15,7 +15,7 @@ if [ -n $ITERM_SESSION_ID ]; then
     # public
     export -f tab-color
     
-    v-colour() {
+    bg-colour() {
         # divide colours by 4 to darken; and translate to hex
         R=$( printf "%02x" `expr $1 / 4` )
         G=$( printf "%02x" `expr $2 / 4` )
@@ -26,6 +26,13 @@ if [ -n $ITERM_SESSION_ID ]; then
     }
     # public
     export -f bg-color
+    
+    change-color() {
+	tab-colour $1 $2 $3
+	bg-colour $1 $2 $3
+    }
+    # public
+    export -f change-color
 
     tab-red() { tab-color 255 0 0; }
 
@@ -45,16 +52,13 @@ if [ -n $ITERM_SESSION_ID ]; then
         if [[ $1 =~ $ssh_pattern ]]; then
     	    prod_pattern='prod'
             if [[ $1 =~ $prod_pattern ]]; then
-               tab-color 255 160 160
-               bg-color 255 160 160
+               change-color 255 160 160
             else
-               tab-color 160 255 160
-               bg-color 160 255 160
+               change-color 160 255 160
             fi
         else
-  	    tab-color 160 160 255
-            bg-color 160 160 255
-        fi
+  	    change-color 160 160 255
+`        fi
     }
 
     precmd_functions+=(iterm2_tab_precmd)

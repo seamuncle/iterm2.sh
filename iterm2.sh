@@ -15,7 +15,7 @@ if [ -n $ITERM_SESSION_ID ]; then
     # public
     export -f tab-color
     
-    bg-colour() {
+    bg-color() {
         # divide colours by 4 to darken; and translate to hex
         R=$( printf "%02x" `expr $1 / 4` )
         G=$( printf "%02x" `expr $2 / 4` )
@@ -28,8 +28,8 @@ if [ -n $ITERM_SESSION_ID ]; then
     export -f bg-color
     
     change-color() {
-	tab-colour $1 $2 $3
-	bg-colour $1 $2 $3
+	tab-color $1 $2 $3
+	bg-color $1 $2 $3
     }
     # public
     export -f change-color
@@ -58,11 +58,8 @@ if [ -n $ITERM_SESSION_ID ]; then
             fi
         else
   	    change-color 160 160 255
-`        fi
+        fi
     }
-
     precmd_functions+=(iterm2_tab_precmd)
     preexec_functions+=(iterm2_tab_preexec)
-
 fi
-

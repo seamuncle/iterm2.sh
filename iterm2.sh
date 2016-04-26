@@ -42,10 +42,10 @@ if [ -n $ITERM_SESSION_ID ]; then
     
     tab_reset() { echo -ne "\033]6;1;bg;*;default\a"; }
     # public
-    export -f tab-reset
+    export -f tab_reset
 
     iterm2_tab_precmd() {
-        tab-reset;
+        tab_reset;
     }
     iterm2_tab_preexec() {
         ssh_pattern='^ssh ' 

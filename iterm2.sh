@@ -45,6 +45,7 @@ if [ -n $ITERM_SESSION_ID ]; then
     export -f tab_reset
 
     iterm2_tab_precmd() {
+        bg_color 160 160 255
         tab_reset;
     }
     iterm2_tab_preexec() {
